@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<title>MultiPlay Online</title>
+		<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	</head>
+	<script>
+	  $(document).ready(function() {
+	  	/*** Server Stuff ***/
+	  	var socket = io();
+
+	  	/*** Canvas Stuff ***/
+	  	var stage = new createjs.Stage('c');
+	  	//stage.scaleX = stage.scaleY = 1.5;
+
+	  	// Background
+	  	var bg = new createjs.Shape();
+	  	bg.graphics.beginFill('#8bb9b0').drawRect(0, 0, 640, 480);
+	  	stage.addChild(bg);
+
+	  	// Player
+	  	var player = new createjs.Bitmap('/assets/player.png');
+	  	player.regX = 9;
+	  	player.regY = 9;
+	  	player.x = 640 / 2;
+	  	player.y = 480 / 2; 
+
+	  	stage.addChild(player);
+
+	  	// Game loop
+	  	createjs.Ticker.addEventListener('tick', gameLoop);
+
+	  	function gameLoop() {
+
+	  		//player.rotation -= 2;
+	  		
+	  		// Update stage
+	  		stage.update();
+	  	}
+
+	  });
+	</script>
+	<body>
+		<canvas id="c" width="640" height="480"></canvas>
+	</body>
+</html>
